@@ -26,7 +26,7 @@
 | reply_ledger_consistent (FM-08) | năng lực trajectory | ≥ 0.95 và không giảm có ý nghĩa | có | 1.0000 |
 | proposal_amount_correct | năng lực outcome | ≥ 0.95 và không giảm có ý nghĩa | có | 0.9857 |
 
-Baseline: run `E-swarm-20261118-f82a`, eval-set SHA `f82a03e2a662`.
+Baseline: run `E-swarm-20261118-1dc1`, eval-set SHA `1dc1f3dfe27b`.
 
 "Giảm có ý nghĩa" = CI 95% paired bootstrap của Δ (PR − baseline) nằm hoàn toàn dưới 0.
 

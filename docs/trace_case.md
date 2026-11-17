@@ -10,7 +10,7 @@ python -m pytest -q tests/test_trace_case_regression.py
 
 | Trường | Nội dung |
 |---|---|
-| Trial | `seeded_regression C-002@11`, run `E-seeded_regression-20261118-f82a` |
+| Trial | `seeded_regression C-002@11`, run `E-seeded_regression-20261118-1dc1` |
 | Triệu chứng | `pass_rate` fail: status `resolved` thay vì `denied`; ledger 20.000 thay vì 0. |
 | Bước sai đầu tiên | Event 3, `model_override`, payload `{"delay_days": 5}`. |
 | Vì sao là bước đầu tiên | Event 1 handoff chỉ có allowlist; event 2 investigator đọc đúng order với `delay_days=2`. Sai lệch chỉ xuất hiện khi ticket ghi 5 ngày đè DB ở event 3. |

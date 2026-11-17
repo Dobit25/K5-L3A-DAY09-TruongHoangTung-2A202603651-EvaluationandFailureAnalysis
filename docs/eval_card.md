@@ -3,8 +3,8 @@
 ## Phiên bản và bằng chứng
 
 - Code/grader commit: `1fb026a77e9f7c9f1b08a8fbe60cee99500d406b` (bao gồm implementation chính ở `d7831799d57a3605c241e16aff26e6f91f63f921`).
-- Core baseline: `E-swarm-20261118-f82a`; eval set v1 SHA `f82a03e2a662`; 14 item × 5 seed.
-- Advanced baseline: `E-swarm-20261118-4bdb`; eval set v2 SHA `4bdb49d9fcda`; 28 item × 5 seed.
+- Core baseline: `E-swarm-20261118-1dc1`; eval set v1 SHA `1dc1f3dfe27b`; 14 item × 5 seed.
+- Advanced baseline: `E-swarm-20261118-cc96`; eval set v2 SHA `cc9688f0c4e7`; 28 item × 5 seed.
 - Backend: MockLLM; seeds chính `11,22,33,44,55`; metric spec v1.0/v2.0.
 - Nhãn nằm trong `labels_v1.json`/`labels_v2.json`, không inline trong item.
 

@@ -57,6 +57,16 @@ def sha12(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()[:12]
 
 
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    """Write stable UTF-8/LF bytes so Windows and Linux compute the same eval-set SHA."""
+    body = "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows)
+    path.write_bytes(body.encode("utf-8"))
+
+
+def write_json(path: Path, payload: Any) -> None:
+    path.write_bytes(json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8"))
+
+
 def build(source: Path = SOURCE) -> tuple[int, int]:
     claims = load_jsonl(source)
     items, labels = [], {}
@@ -74,8 +84,8 @@ def build(source: Path = SOURCE) -> tuple[int, int]:
         })
         labels[claim["claim_id"]] = claim["expected"]
     ITEMS.parent.mkdir(parents=True, exist_ok=True)
-    ITEMS.write_text("".join(json.dumps(i, ensure_ascii=False) + "\n" for i in items), encoding="utf-8")
-    LABELS.write_text(json.dumps(labels, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_jsonl(ITEMS, items)
+    write_json(LABELS, labels)
     return len(items), len(labels)
 
 
@@ -116,8 +126,8 @@ def build_v2(items_v1: Path = ITEMS, labels_v1: Path = LABELS, pack: Path = PACK
             "slices": slices_for(claim["expected"], True),
         })
         labels[claim["claim_id"]] = claim["expected"]
-    ITEMS_V2.write_text("".join(json.dumps(i, ensure_ascii=False) + "\n" for i in items), encoding="utf-8")
-    LABELS_V2.write_text(json.dumps(labels, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_jsonl(ITEMS_V2, items)
+    write_json(LABELS_V2, labels)
     return len(items), len(labels)
 
 
