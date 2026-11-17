@@ -81,7 +81,7 @@ class ProposalAmountCorrect(Evaluator[Any, Trial]):
 class ReplyLedgerConsistent(Evaluator[Any, Trial]):
     """FM-08: a resolved reply must state the amount actually committed to the ledger."""
 
-    _amount = re.compile(r"(?<!\d)(\d{1,3}(?:\.\d{3})+|\d+)(?:đ|\s*VND)?", re.IGNORECASE)
+    _amount = re.compile(r"(?<!\d)(\d{1,3}(?:[.,]\d{3})+|\d+)\s*(?:đ|VND)", re.IGNORECASE)
 
     def evaluate(self, ctx: EvaluatorContext[Any, Trial]) -> EvaluationReason:
         result = ctx.output.get("result") or {}
@@ -96,7 +96,7 @@ class ReplyLedgerConsistent(Evaluator[Any, Trial]):
         matches = self._amount.findall(replies[-1])
         if not matches:
             return EvaluationReason(value=False, reason="resolved reply has no VND amount")
-        stated = int(matches[0].replace(".", ""))
+        stated = int(matches[0].replace(".", "").replace(",", ""))
         committed = int(ctx.output["snapshot"].get("refund_vnd") or 0)
         return EvaluationReason(value=stated == committed,
                                 reason=None if stated == committed else f"reply={stated}, ledger={committed}")

@@ -38,4 +38,3 @@ def test_proposal_amount_catches_pre_deduction_to_zero():
         _ctx(reply="Chưa đủ điều kiện hoàn.", ledger=0, proposal=0, expected_proposal=35_000)
     )
     assert result.value is False
-

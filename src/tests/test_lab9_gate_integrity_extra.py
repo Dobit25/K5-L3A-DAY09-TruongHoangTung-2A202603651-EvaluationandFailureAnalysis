@@ -60,4 +60,3 @@ def test_ratchet_rejects_removed_or_weakened_metric_and_slice():
     assert any("minimum" in p for p in problems)
     assert any("no_significant_drop" in p for p in problems)
     assert any("slice" in p and "disappeared" in p for p in problems)
-

@@ -13,4 +13,3 @@ def test_ticket_trust_first_wrong_step_is_visible_and_fixed_variant_removes_it()
     assert fixed["snapshot"]["refund_vnd"] == 0
     assert broken["lab8_pass"] is False
     assert fixed["lab8_pass"] is True
-

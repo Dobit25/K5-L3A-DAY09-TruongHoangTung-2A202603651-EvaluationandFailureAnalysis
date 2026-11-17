@@ -40,6 +40,9 @@ def integrity_check(pr: dict, base: dict, spec: dict, base_spec: dict | None = N
     for metric, value in (pr.get("metrics") or {}).items():
         if isinstance(value, (int, float)) and not isinstance(value, bool) and not math.isfinite(value):
             problems.append(f"metric {metric} is not finite")
+    for metric in spec.get("metrics") or []:
+        if metric["id"] not in (pr.get("metrics") or {}):
+            problems.append(f"aggregate metric {metric['id']} is missing")
 
     rows = pr.get("rows") or []
     manifest = pr.get("manifest") or {}
